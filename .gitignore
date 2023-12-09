@@ -1,0 +1,17 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/WepApiCore_Copy/.vs
+/WepApiCore_Copy/WepApicore/.vs/ProjectEvaluation
+/WepApiCore_Copy/WepApicore/.vs/WepApicore/DesignTimeBuild
+/WepApiCore_Copy/WepApicore/.vs/WepApicore/FileContentIndex
+/WepApiCore_Copy/WepApicore/.vs/WepApicore
+/WepApiCore_Copy/WepApicore/advanded_csharp_database/bin/Debug/net6.0
+/WepApiCore_Copy/WepApicore/advanded_csharp_database/obj
+/WepApiCore_Copy/WepApicore/advanded_csharp_DTO/bin/Debug/net6.0
+/WepApiCore_Copy/WepApicore/advanded_csharp_DTO/obj
+/WepApiCore_Copy/WepApicore/advanded_csharp_main/bin/Debug/net6.0/logs
+/WepApiCore_Copy/WepApicore/advanded_csharp_main/bin/Debug/net6.0
+/WepApiCore_Copy/WepApicore/advanded_csharp_main/obj
+/WepApiCore_Copy/WepApicore/advanded_csharp_main/Properties
