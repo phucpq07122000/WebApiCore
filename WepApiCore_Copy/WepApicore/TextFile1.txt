@@ -1,0 +1,19 @@
+﻿Step To do Wep api(.net framwork core - entity frame work)
+1// Create connect at _Database
+	 + create a function config query của nó
+	          a/ Lập models cái Onject adapter SQl 
+			  b/ Xong tạo entity connect Vào
+				-> Class OnConfiguring  (DbContextOptionsBuilder optionsBuilder)
+2/ Map Xong SQl cần Giá trị Để hiện Ra tạo Request và Response
+			a/ Tạo DTO->                  { ////    ,  //// }
+			b/ 
+			  
+
+
+
+Client --request--> API{
+			 step 1 - Middlerwave
+			step 2 - Authention
+		 step 3 - Cors
+								} --> Controller --> Action ---response---> Client
+					

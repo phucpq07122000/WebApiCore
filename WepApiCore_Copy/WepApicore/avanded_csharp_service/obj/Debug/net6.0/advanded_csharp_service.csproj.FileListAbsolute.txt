@@ -1,0 +1,17 @@
+E:\Data_01\WepApicore\avanded_csharp_service\bin\Debug\net6.0\advanded_csharp_service.deps.json
+E:\Data_01\WepApicore\avanded_csharp_service\bin\Debug\net6.0\advanded_csharp_service.dll
+E:\Data_01\WepApicore\avanded_csharp_service\bin\Debug\net6.0\advanded_csharp_service.pdb
+E:\Data_01\WepApicore\avanded_csharp_service\bin\Debug\net6.0\advanded_csharp_database.dll
+E:\Data_01\WepApicore\avanded_csharp_service\bin\Debug\net6.0\advanded_csharp_dto.dll
+E:\Data_01\WepApicore\avanded_csharp_service\bin\Debug\net6.0\advanded_csharp_database.pdb
+E:\Data_01\WepApicore\avanded_csharp_service\bin\Debug\net6.0\advanded_csharp_dto.pdb
+E:\Data_01\WepApicore\avanded_csharp_service\obj\Debug\net6.0\advanded_csharp_service.csproj.AssemblyReference.cache
+E:\Data_01\WepApicore\avanded_csharp_service\obj\Debug\net6.0\advanded_csharp_service.GeneratedMSBuildEditorConfig.editorconfig
+E:\Data_01\WepApicore\avanded_csharp_service\obj\Debug\net6.0\advanded_csharp_service.AssemblyInfoInputs.cache
+E:\Data_01\WepApicore\avanded_csharp_service\obj\Debug\net6.0\advanded_csharp_service.AssemblyInfo.cs
+E:\Data_01\WepApicore\avanded_csharp_service\obj\Debug\net6.0\advanded_csharp_service.csproj.CoreCompileInputs.cache
+E:\Data_01\WepApicore\avanded_csharp_service\obj\Debug\net6.0\advanded_csharp_service.csproj.CopyComplete
+E:\Data_01\WepApicore\avanded_csharp_service\obj\Debug\net6.0\advanded_csharp_service.dll
+E:\Data_01\WepApicore\avanded_csharp_service\obj\Debug\net6.0\refint\advanded_csharp_service.dll
+E:\Data_01\WepApicore\avanded_csharp_service\obj\Debug\net6.0\advanded_csharp_service.pdb
+E:\Data_01\WepApicore\avanded_csharp_service\obj\Debug\net6.0\ref\advanded_csharp_service.dll

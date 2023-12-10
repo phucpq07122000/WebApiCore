@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="log4net" Version="2.0.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.25" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="9.14.0.81108">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\advanded_csharp_database\advanded_csharp_database.csproj" />
+    <ProjectReference Include="..\advanded_csharp_DTO\advanded_csharp_dto.csproj" />
+  </ItemGroup>
+
+</Project>
