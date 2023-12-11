@@ -71,7 +71,6 @@ namespace advanded_csharp_service.ProductService
                         };
                     }
                 }
-
             }
             return Task.FromResult(productResponse);
         }
@@ -94,9 +93,14 @@ namespace advanded_csharp_service.ProductService
                 if (context.Products != null)
                 {
                     IQueryable<Product> query = context.Products
-                    .Where(a => a.Name.Contains(request.ProductName))
+                    .Where(a => a.Category.Contains(request.ProductName))
                     .OrderBy(a => a.Quantity)
                     .AsQueryable(); // not excute
+
+                    string queryString = query
+                    .Skip(request.PageSize * (request.PageIndex - 1))
+                    .Take(request.PageSize).ToQueryString();
+                    Console.WriteLine(queryString);
 
                     getDataProductResponse.Data = await query
                         .Skip(request.PageSize * (request.PageIndex - 1))
@@ -128,40 +132,31 @@ namespace advanded_csharp_service.ProductService
         /// <link> https://learn.microsoft.com/en-us/ef/core/saving/disconnected-entities#saving-single-entities</link>
         public async Task<ProductDto> UpdateProduct(ProductDto request)
         {
-            using DataDbContext context = new();
-            if (context.Products != null)
+            using (DataDbContext context = new()) 
             {
-                Product? existingProduct = context.Products.Find(request.Id);
-                if (existingProduct != null)
+                if (context.Products != null)
                 {
-                    _ = context.Products.Update(FindValueChangeAndReplace(request, existingProduct));
-                    _ = await context.SaveChangesAsync();
-                    return await GetDetailProduct(request.Id);
+                    Product? existingProduct = context.Products.Find(request.Id);
+                    if (existingProduct != null)
+                    {
+                        //Check Vallue update which is not have value
+                        existingProduct.Name = (request.Name != "") ? request.Name : existingProduct.Name;
+                        existingProduct.Price = (request.Price != "") ? request.Price : existingProduct.Price;
+                        existingProduct.Unit = (request.Unit != "") ? request.Unit : existingProduct.Unit;
+                        existingProduct.Quantity = (request.Quantity == 0) ? request.Quantity : existingProduct.Quantity;
+                        existingProduct.Category = (request.Category != "") ? request.Category : existingProduct.Category;
+                        existingProduct.Images = (request.Images != "") ? request.Images : existingProduct.Images;
+
+                        //executed update
+                        _ = context.Products.Update(existingProduct);
+                        _ = await context.SaveChangesAsync();
+                        return await GetDetailProduct(request.Id);
+                    }
                 }
+                return await GetDetailProduct(request.Id);
             }
-            return await GetDetailProduct(request.Id);
         }
-
-
-
-        /// <summary>
-        /// Method Check Vallue update which is not have value
-        /// </summary>
-        /// <param name="requestUpdate"></param>
-        /// <param name="existingProduct"></param>
-        /// <returns></returns>
-        public Product FindValueChangeAndReplace(ProductDto requestUpdate, Product existingProduct)
-        {
-            existingProduct.Name = (requestUpdate.Name != "") ? requestUpdate.Name : existingProduct.Name;
-            existingProduct.Price = (requestUpdate.Price != "") ? requestUpdate.Price : existingProduct.Price;
-            existingProduct.Unit = (requestUpdate.Unit != "") ? requestUpdate.Unit : existingProduct.Unit;
-            existingProduct.Quantity = (requestUpdate.Quantity == 0) ? requestUpdate.Quantity : existingProduct.Quantity;
-            existingProduct.Category = (requestUpdate.Category != "") ? requestUpdate.Category : existingProduct.Category;
-            existingProduct.Images = (requestUpdate.Images != "") ? requestUpdate.Images : existingProduct.Images;
-            return existingProduct;
-
-        }
-
+   
         /// <summary>
         /// Delete
         /// </summary>

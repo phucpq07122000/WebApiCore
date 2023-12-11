@@ -8,6 +8,7 @@ namespace advanded_csharp_database
 
         public DbSet<Product>? Products { get; set; }
         public DbSet<User>? Users { get; set; }
+        public DbSet<Cart>? carts { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
