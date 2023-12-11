@@ -2218,7 +2218,8 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "6.0.25",
           "Microsoft.EntityFrameworkCore.Proxies": "6.0.25",
-          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.25"
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.25",
+          "advanded_csharp_dto": "1.0.0"
         },
         "compile": {
           "bin/placeholder/advanded_csharp_database.dll": {}

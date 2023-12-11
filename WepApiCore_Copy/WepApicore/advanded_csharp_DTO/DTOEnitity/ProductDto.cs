@@ -9,6 +9,7 @@
         public string Unit { get; set; } = "VND";
         public string Images { get; set; } = string.Empty;
         public string Category { get; set; } = string.Empty;
+        public bool IsActive { get; set; } = true;
         public DateTimeOffset CreatedAt { get; set; }
     }
 }

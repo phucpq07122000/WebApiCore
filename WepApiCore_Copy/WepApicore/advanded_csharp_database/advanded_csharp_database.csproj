@@ -16,4 +16,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\advanded_csharp_DTO\advanded_csharp_dto.csproj" />
+  </ItemGroup>
+
 </Project>

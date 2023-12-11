@@ -32,7 +32,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "E:\\Data_01\\Data_01\\Git_Clone\\WepApiCore\\WepApiCore_Copy\\WepApicore\\advanded_csharp_DTO\\advanded_csharp_dto.csproj": {
+                "projectPath": "E:\\Data_01\\Data_01\\Git_Clone\\WepApiCore\\WepApiCore_Copy\\WepApicore\\advanded_csharp_DTO\\advanded_csharp_dto.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

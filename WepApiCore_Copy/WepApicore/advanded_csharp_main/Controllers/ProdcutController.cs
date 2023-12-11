@@ -36,14 +36,11 @@ namespace advanded_csharp_main.Controllers
             {
                 GetDataProductResponse response = await _iProductService.GetProductList(request);
                 _loggingService.LogInfo(JsonSerializer.Serialize(response));
-
-
                 return new JsonResult(response);
             }
             catch (Exception ex)
             {
                 // send to logging service
-
                 _loggingService.LogError(ex);
                 return StatusCode(500, ex.Message);
             }
