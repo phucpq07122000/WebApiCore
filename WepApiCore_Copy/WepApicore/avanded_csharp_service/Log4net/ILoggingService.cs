@@ -1,5 +1,4 @@
 ﻿
-
 namespace advanded_csharp_service.Log4net
 {
     public interface ILoggingService

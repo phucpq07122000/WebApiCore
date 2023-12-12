@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace advanded_csharp_database.Models
 {
     [Table("product")]
-    public class Product : BaseEntity
+    public class Product : BaseEntity, ITransfrom<ProductRespone>
     {
         [Column("Name")]
         public string Name { get; set; } = string.Empty;
@@ -15,7 +15,7 @@ namespace advanded_csharp_database.Models
         public string Category { get; set; } = string.Empty;
         public bool IsActive { get; set; } = true;
 
-        public ProductRespone CloneProductToCart()
+        public ProductRespone Transfrom()
         {
             return new ProductRespone()
             {

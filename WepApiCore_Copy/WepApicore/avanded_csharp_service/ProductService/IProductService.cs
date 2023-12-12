@@ -2,7 +2,6 @@
 using advanded_csharp_dto.Request;
 using advanded_csharp_dto.Response;
 
-
 namespace advanded_csharp_service.ProductService
 {
     public interface IProductService

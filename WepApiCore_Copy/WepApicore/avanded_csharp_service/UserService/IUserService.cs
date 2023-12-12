@@ -28,9 +28,12 @@ namespace advanded_csharp_service.UserService
         /// <returns></returns>
         Task<UserResponse> UpdateUser(UserRequest requestUpdate);
 
+        /// <summary>
+        /// Del user
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         Task<bool> DeleteUser(Guid id);
-
-
         /// <summary>
         /// Get USer details
         /// </summary>
