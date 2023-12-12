@@ -5,17 +5,15 @@ namespace advanded_csharp_database
 {
     public class DataDbContext : DbContext
     {
-
         public DbSet<Product>? Products { get; set; }
         public DbSet<User>? Users { get; set; }
         public DbSet<Cart>? carts { get; set; }
-
-
+        public DbSet<Order>? orders { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             _ = optionsBuilder
                 .UseLazyLoadingProxies()
-                .UseSqlServer("Data Source=LAPTOP-PDVMP1JL\\SQLEXPRESS;Initial Catalog=Advanded_Csharp;Integrated Security=True");
+                .UseSqlServer("Server=sql.bsite.net\\MSSQL2016;Database=ghddhhg_Ghddhhg;User Id=ghddhhg_Ghddhhg;Password=123456;Trusted_Connection=False;");
         }
     }
 }

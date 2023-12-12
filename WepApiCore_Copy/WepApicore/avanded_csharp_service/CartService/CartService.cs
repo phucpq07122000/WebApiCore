@@ -7,7 +7,7 @@ namespace advanded_csharp_service.CartService
 {
     public class CartService : ICartService
     {
-        public async Task<ListProductInCartResponse> AddToCart(AddProductToCart request)
+        public async Task<ListProductInCartResponse> AddToCart(CartProductRequest request)
         {
             using (DataDbContext context = new())
             {
@@ -44,7 +44,7 @@ namespace advanded_csharp_service.CartService
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<bool> InsertCart(AddProductToCart request)
+        public async Task<bool> InsertCart(CartProductRequest request)
         {
             
             DataDbContext context = new();
@@ -92,11 +92,10 @@ namespace advanded_csharp_service.CartService
                                 Product? product = context.Products.Find(ok);
                                 if(product != null)
                                 {
-                                    listProductInCartResponse.Data.Add(product.CloneProductToCart());
+                                    listProductInCartResponse.Data.Add(product.Transfrom());
                                 }                                                      
                             }
                         }
-
                         listProductInCartResponse.TotalPay = (int)listProductInCartResponse.Data.Sum(p => double.Parse(p.Price));
                         listProductInCartResponse.Count = listProductInCartResponse.Data.Count;
                     }  
@@ -110,9 +109,8 @@ namespace advanded_csharp_service.CartService
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<bool> UpdateCart(AddProductToCart request)
+        public async Task<bool> UpdateCart(CartProductRequest request)
         {
-          
             using (DataDbContext context = new())
             {
                 if(context.carts!= null)
@@ -121,18 +119,54 @@ namespace advanded_csharp_service.CartService
                     
                     if(cart != null)
                     {
-                        string newProdcut = "," + request.ProductId;
-                        cart.ListProduct = cart.ListProduct + newProdcut ;
-                        await context.carts.AddAsync(cart);
+                        if (cart.ListProduct == "")
+                        {
+                            string newProdcut = request.ProductId.ToString();
+                            cart.ListProduct = cart.ListProduct + newProdcut;
+                          
+                        }
+                        else
+                        {
+                            string newProdcut = "," + request.ProductId;
+                            cart.ListProduct = cart.ListProduct + newProdcut;
+                            
+                        }
+                        
+                        context.carts.Update(cart);
                         await context.SaveChangesAsync();
-                        return await context.SaveChangesAsync()>0;
+                        return await context.SaveChangesAsync() > 0;
+
                     }       
                 }
             }
             return false;
         }
 
-    
+        public async Task<ListProductInCartResponse> DeleteItemCart(CartProductRequest request)
+        {
+            using (DataDbContext context = new())
+            {
+                if (context.carts != null)
+                {
+                    Cart? cart = context.carts.Find(request.UserId);
+                    if (cart != null)
+                    {
+                        CartResponse cartResponse = cart.Transfrom();
+                        List<string> result = cartResponse.ListProduct.Split(',').ToList();                      
+                        string guidString = request.ProductId.ToString();
+                        result.Remove(guidString);
+                        string UpdateAfterDel = string.Join(",", result);
+                        cart.ListProduct = UpdateAfterDel;
+                        context.carts.Update(cart);
+                        await context.SaveChangesAsync();
+
+                    }
+                }
+            }
+            return await GetCart(request.UserId);
+        }
+
+
 
     }
 }
