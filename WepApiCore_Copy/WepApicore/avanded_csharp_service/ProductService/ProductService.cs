@@ -87,13 +87,13 @@ namespace advanded_csharp_service.ProductService
             {
                 PageSize = request.PageSize,
                 PageIndex = request.PageIndex
-            };
+            };  
             using (DataDbContext context = new())
             {
                 if (context.Products != null)
                 {
                     IQueryable<Product> query = context.Products
-                    .Where(a => a.Category.Contains(request.ProductName))
+                    .Where(a => a.Name.Contains(request.ProductName))
                     .OrderBy(a => a.Quantity)
                     .AsQueryable(); // not excute
 
@@ -132,31 +132,29 @@ namespace advanded_csharp_service.ProductService
         /// <link> https://learn.microsoft.com/en-us/ef/core/saving/disconnected-entities#saving-single-entities</link>
         public async Task<ProductDto> UpdateProduct(ProductDto request)
         {
-            using (DataDbContext context = new()) 
+            using DataDbContext context = new();
+            if (context.Products != null)
             {
-                if (context.Products != null)
+                Product? existingProduct = context.Products.Find(request.Id);
+                if (existingProduct != null)
                 {
-                    Product? existingProduct = context.Products.Find(request.Id);
-                    if (existingProduct != null)
-                    {
-                        //Check Vallue update which is not have value
-                        existingProduct.Name = (request.Name != "") ? request.Name : existingProduct.Name;
-                        existingProduct.Price = (request.Price != "") ? request.Price : existingProduct.Price;
-                        existingProduct.Unit = (request.Unit != "") ? request.Unit : existingProduct.Unit;
-                        existingProduct.Quantity = (request.Quantity == 0) ? request.Quantity : existingProduct.Quantity;
-                        existingProduct.Category = (request.Category != "") ? request.Category : existingProduct.Category;
-                        existingProduct.Images = (request.Images != "") ? request.Images : existingProduct.Images;
+                    //Check Vallue update which is not have value
+                    existingProduct.Name = (request.Name != "") ? request.Name : existingProduct.Name;
+                    existingProduct.Price = (request.Price != "") ? request.Price : existingProduct.Price;
+                    existingProduct.Unit = (request.Unit != "") ? request.Unit : existingProduct.Unit;
+                    existingProduct.Quantity = (request.Quantity == 0) ? request.Quantity : existingProduct.Quantity;
+                    existingProduct.Category = (request.Category != "") ? request.Category : existingProduct.Category;
+                    existingProduct.Images = (request.Images != "") ? request.Images : existingProduct.Images;
 
-                        //executed update
-                        _ = context.Products.Update(existingProduct);
-                        _ = await context.SaveChangesAsync();
-                        return await GetDetailProduct(request.Id);
-                    }
+                    //executed update
+                    _ = context.Products.Update(existingProduct);
+                    _ = await context.SaveChangesAsync();
+                    return await GetDetailProduct(request.Id);
                 }
-                return await GetDetailProduct(request.Id);
             }
+            return await GetDetailProduct(request.Id);
         }
-   
+
         /// <summary>
         /// Delete
         /// </summary>

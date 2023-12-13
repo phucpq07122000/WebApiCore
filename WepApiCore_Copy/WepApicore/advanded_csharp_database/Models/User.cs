@@ -1,5 +1,4 @@
-﻿using advanded_csharp_database.Enum;
-using advanded_csharp_dto.Response;
+﻿using advanded_csharp_dto.Response;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace advanded_csharp_database.Models
@@ -11,16 +10,16 @@ namespace advanded_csharp_database.Models
         public string User_Email { get; set; } = string.Empty;
         public string User_Password { get; set; } = string.Empty;
         public bool IsActive { get; set; } = true;
-        public string Role { get;set; }=string.Empty;
+        public string Role { get; set; } = string.Empty;
 
         public UserResponse Transfrom()
         {
             return new UserResponse()
             {
-                Id = this.Id,
-                User_Name = this.User_Name,
-                User_Email = this.User_Email,
-                User_Password = this.User_Password, 
+                Id = Id,
+                User_Name = User_Name,
+                User_Email = User_Email,
+                User_Password = User_Password,
             };
         }
     }

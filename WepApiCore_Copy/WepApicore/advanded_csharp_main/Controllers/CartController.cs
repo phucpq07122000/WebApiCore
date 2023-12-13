@@ -1,9 +1,9 @@
-﻿using advanded_csharp_service.Log4net;
-using advanded_csharp_service;
-using Microsoft.AspNetCore.Mvc;
-using advanded_csharp_service.CartService;
-using advanded_csharp_dto.Request;
+﻿using advanded_csharp_dto.Request;
 using advanded_csharp_dto.Response;
+using advanded_csharp_service;
+using advanded_csharp_service.CartService;
+using advanded_csharp_service.Log4net;
+using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 

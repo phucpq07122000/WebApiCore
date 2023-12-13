@@ -35,19 +35,18 @@ namespace advanded_csharp_service.UserService
         public Task<UserResponse> GetUserDetail(Guid id)
         {
             UserResponse userResponse = new();
-            using( DataDbContext context = new())
+            using (DataDbContext context = new())
             {
                 if (context.Users != null)
                 {
-                    User? user =  context.Users.Find(id);
+                    User? user = context.Users.Find(id);
                     if (user != null)
                     {
-                       userResponse = user.Transfrom();
-                      
+                        userResponse = user.Transfrom();
                         return Task.FromResult(userResponse);
                     }
                 }
-            }     
+            }
             return Task.FromResult(userResponse);
         }
 
@@ -86,26 +85,24 @@ namespace advanded_csharp_service.UserService
 
         public async Task<UserResponse> UpdateUser(UserRequest requestUpdate)
         {
-            using (DataDbContext context = new())
+            using DataDbContext context = new();
+            if (context.Users != null)
             {
-                if (context.Users != null)
+                User? existingUser = context.Users.Find(requestUpdate.id);
+                if (existingUser != null)
                 {
-                    User? existingUser = context.Users.Find(requestUpdate.id);
-                    if (existingUser != null)
-                    {
-                        //Check Vallue update which is not have value
-                        existingUser.User_Name = (requestUpdate.User_Name != "") ? requestUpdate.User_Name: existingUser.User_Name;
-                        existingUser.User_Password = (requestUpdate.User_Password != "") ? BCrypt.Net.BCrypt.HashPassword(requestUpdate.User_Password) : existingUser.User_Password;
-                        existingUser.User_Email = (requestUpdate.User_Email != "") ? requestUpdate.User_Email : existingUser.User_Email ;
-                       
-                        //executed update
-                        _ = context.Users.Update(existingUser);
-                        _ = await context.SaveChangesAsync();
-                        return await GetUserDetail(requestUpdate.id);
-                    }
+                    //Check Vallue update which is not have value
+                    existingUser.User_Name = (requestUpdate.User_Name != "") ? requestUpdate.User_Name : existingUser.User_Name;
+                    existingUser.User_Password = (requestUpdate.User_Password != "") ? BCrypt.Net.BCrypt.HashPassword(requestUpdate.User_Password) : existingUser.User_Password;
+                    existingUser.User_Email = (requestUpdate.User_Email != "") ? requestUpdate.User_Email : existingUser.User_Email;
+
+                    //executed update
+                    _ = context.Users.Update(existingUser);
+                    _ = await context.SaveChangesAsync();
+                    return await GetUserDetail(requestUpdate.id);
                 }
-                return await GetUserDetail(requestUpdate.id);
             }
+            return await GetUserDetail(requestUpdate.id);
         }
 
         public Task<bool> DeleteUser(Guid id)
@@ -113,10 +110,10 @@ namespace advanded_csharp_service.UserService
             UserRequest deleteUesr = new()
             {
                 id = id,
-                IsActiveOrNot=false,           
+                IsActiveOrNot = false,
             };
-            bool i = (UpdateUser(deleteUesr) != null);
-            return Task.FromResult(i);      
+            bool i = UpdateUser(deleteUesr) != null;
+            return Task.FromResult(i);
         }
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace advanded_csharp_dto.Request
+﻿namespace advanded_csharp_dto.Request
 {
     public class GetListUserRequest
     {
@@ -12,6 +6,6 @@ namespace advanded_csharp_dto.Request
         public int PageIndex { get; set; } = 1;
         public string UserName { get; set; } = string.Empty;
 
-        public readonly bool IsActive ;
+        public readonly bool IsActive;
     }
 }

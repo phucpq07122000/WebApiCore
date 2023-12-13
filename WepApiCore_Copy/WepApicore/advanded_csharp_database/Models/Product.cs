@@ -19,11 +19,11 @@ namespace advanded_csharp_database.Models
         {
             return new ProductRespone()
             {
-              Id= Id,
-              Name= Name,
-              Price= Price,
-              Unit= Unit,
-              Quantity=Quantity,
+                Id = Id,
+                Name = Name,
+                Price = Price,
+                Unit = Unit,
+                Quantity = Quantity,
             };
         }
     }
