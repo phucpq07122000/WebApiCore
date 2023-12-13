@@ -14,19 +14,25 @@ namespace advanded_csharp_service.CartService
                 if (context.Users != null && context.carts != null && context.Products != null)
                 {
                     //Check cart
-                    Cart? cart = context.carts.Find(request.UserId);                    
-                    
-                    if( cart == null )
+                    Cart? cart = context.carts.Find(request.UserId);
+
+                    if (cart == null)
                     {
                         // if A user dont have any cart create new
                         bool i = await InsertCart(request);
-                        if (i) return await GetCart(request.UserId);
+                        if (i)
+                        {
+                            return await GetCart(request.UserId);
+                        }
                     }
                     else if (request.ProductId != Guid.Empty)
                     {
                         //if A user have  cart update it
                         bool i = await UpdateCart(request);
-                        if (i) return await GetCart(request.UserId);
+                        if (i)
+                        {
+                            return await GetCart(request.UserId);
+                        }
                     }
                     else
                     {
@@ -46,7 +52,7 @@ namespace advanded_csharp_service.CartService
         /// <returns></returns>
         public async Task<bool> InsertCart(CartProductRequest request)
         {
-            
+
             DataDbContext context = new();
             if (context.carts != null)
             {
@@ -55,7 +61,7 @@ namespace advanded_csharp_service.CartService
                     Id = request.UserId,
                     ListProduct = request.ProductId.ToString()
                 };
-                await context.carts.AddAsync(cart);
+                _ = await context.carts.AddAsync(cart);
                 int i = await context.SaveChangesAsync(); //save change trả về int
                 return i > 0;
             }
@@ -69,7 +75,7 @@ namespace advanded_csharp_service.CartService
         /// <returns></returns>
         public Task<ListProductInCartResponse> GetCart(Guid cardId)
         {
-          
+
             ListProductInCartResponse listProductInCartResponse = new()
             {
                 PageSize = 10,
@@ -86,19 +92,19 @@ namespace advanded_csharp_service.CartService
                         List<string> result = cartResponse.ListProduct.Split(',').ToList();
                         foreach (string id in result)
                         {
-                            Guid ok = new Guid(id);
-                            if(context.Products!= null)
+                            Guid ok = new(id);
+                            if (context.Products != null)
                             {
                                 Product? product = context.Products.Find(ok);
-                                if(product != null)
+                                if (product != null)
                                 {
                                     listProductInCartResponse.Data.Add(product.Transfrom());
-                                }                                                      
+                                }
                             }
                         }
                         listProductInCartResponse.TotalPay = (int)listProductInCartResponse.Data.Sum(p => double.Parse(p.Price));
                         listProductInCartResponse.Count = listProductInCartResponse.Data.Count;
-                    }  
+                    }
                 }
             }
             return Task.FromResult(listProductInCartResponse);
@@ -111,32 +117,30 @@ namespace advanded_csharp_service.CartService
         /// <returns></returns>
         public async Task<bool> UpdateCart(CartProductRequest request)
         {
-            using (DataDbContext context = new())
+            using DataDbContext context = new();
+            if (context.carts != null)
             {
-                if(context.carts!= null)
-                {
-                    Cart? cart = context.carts.Find(request.UserId);
-                    
-                    if(cart != null)
-                    {
-                        if (cart.ListProduct == "")
-                        {
-                            string newProdcut = request.ProductId.ToString();
-                            cart.ListProduct = cart.ListProduct + newProdcut;
-                          
-                        }
-                        else
-                        {
-                            string newProdcut = "," + request.ProductId;
-                            cart.ListProduct = cart.ListProduct + newProdcut;
-                            
-                        }
-                        
-                        context.carts.Update(cart);
-                        await context.SaveChangesAsync();
-                        return await context.SaveChangesAsync() > 0;
+                Cart? cart = context.carts.Find(request.UserId);
 
-                    }       
+                if (cart != null)
+                {
+                    if (cart.ListProduct == "")
+                    {
+                        string newProdcut = request.ProductId.ToString();
+                        cart.ListProduct += newProdcut;
+
+                    }
+                    else
+                    {
+                        string newProdcut = "," + request.ProductId;
+                        cart.ListProduct += newProdcut;
+
+                    }
+
+                    _ = context.carts.Update(cart);
+                    _ = await context.SaveChangesAsync();
+                    return await context.SaveChangesAsync() > 0;
+
                 }
             }
             return false;
@@ -152,13 +156,13 @@ namespace advanded_csharp_service.CartService
                     if (cart != null)
                     {
                         CartResponse cartResponse = cart.Transfrom();
-                        List<string> result = cartResponse.ListProduct.Split(',').ToList();                      
+                        List<string> result = cartResponse.ListProduct.Split(',').ToList();
                         string guidString = request.ProductId.ToString();
-                        result.Remove(guidString);
+                        _ = result.Remove(guidString);
                         string UpdateAfterDel = string.Join(",", result);
                         cart.ListProduct = UpdateAfterDel;
-                        context.carts.Update(cart);
-                        await context.SaveChangesAsync();
+                        _ = context.carts.Update(cart);
+                        _ = await context.SaveChangesAsync();
 
                     }
                 }

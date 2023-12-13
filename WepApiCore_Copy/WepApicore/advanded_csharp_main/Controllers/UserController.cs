@@ -1,18 +1,18 @@
 ﻿
-using advanded_csharp_service.Log4net;
-using advanded_csharp_service;
-using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-using advanded_csharp_service.UserService;
 using advanded_csharp_dto.DTOEnitity;
 using advanded_csharp_dto.Request;
 using advanded_csharp_dto.Response;
+using advanded_csharp_service;
+using advanded_csharp_service.Log4net;
+using advanded_csharp_service.UserService;
+using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace advanded_csharp_main.Controllers
 {
     [Route("api/UserRun")]
     [ApiController]
-    public class UserController:ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly ILoggingService _loggingService;
         private readonly IUserService _iUserService;
@@ -30,7 +30,7 @@ namespace advanded_csharp_main.Controllers
         /// <returns></returns>
         [Route("get-AddnewUser")]
         [HttpPost()]
-        public async Task<IActionResult> AddNewUser([FromQuery]UserDto request)
+        public async Task<IActionResult> AddNewUser([FromQuery] UserDto request)
         {
             try
             {
@@ -46,7 +46,8 @@ namespace advanded_csharp_main.Controllers
                     return new JsonResult("Fail");
 
                 }
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 _loggingService.LogError(ex);
                 return StatusCode(500, ex.Message);
@@ -60,7 +61,7 @@ namespace advanded_csharp_main.Controllers
         /// <returns></returns>
         [Route("get-UserDetails")]
         [HttpGet()]
-        public async Task<IActionResult> GetUserDetail([FromQuery]Guid id)
+        public async Task<IActionResult> GetUserDetail([FromQuery] Guid id)
         {
             try
             {
@@ -82,7 +83,7 @@ namespace advanded_csharp_main.Controllers
         /// <returns></returns>
         [Route("Get-UserActive")]
         [HttpGet()]
-        public async Task<IActionResult> GetUserActive([FromQuery]GetListUserRequest request)
+        public async Task<IActionResult> GetUserActive([FromQuery] GetListUserRequest request)
         {
             try
             {
@@ -131,7 +132,7 @@ namespace advanded_csharp_main.Controllers
                     _loggingService.LogInfo(JsonSerializer.Serialize(i));
                     return new JsonResult("Fail");
 
-                }              
+                }
             }
             catch (Exception ex)
             {

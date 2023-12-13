@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TextFile1.txt = TextFile1.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "advanded_csharp_test", "advanded_csharp_test\advanded_csharp_test.csproj", "{6FA1E87B-9462-4773-BFD4-AAFCF633DD54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{D84790AA-3D5F-4051-85C6-69B42CA37C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D84790AA-3D5F-4051-85C6-69B42CA37C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D84790AA-3D5F-4051-85C6-69B42CA37C16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FA1E87B-9462-4773-BFD4-AAFCF633DD54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FA1E87B-9462-4773-BFD4-AAFCF633DD54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FA1E87B-9462-4773-BFD4-AAFCF633DD54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FA1E87B-9462-4773-BFD4-AAFCF633DD54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
