@@ -87,7 +87,7 @@ namespace advanded_csharp_service.ProductService
             {
                 PageSize = request.PageSize,
                 PageIndex = request.PageIndex
-            };  
+            };
             using (DataDbContext context = new())
             {
                 if (context.Products != null)
