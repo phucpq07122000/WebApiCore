@@ -1,22 +1,14 @@
-﻿using advanded_csharp_service.Log4net;
-using advanded_csharp_service.ProductService;
-using advanded_csharp_service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using advanded_csharp_dto.Response;
+﻿using advanded_csharp_dto.DTOEnitity;
 using advanded_csharp_dto.Request;
-using advanded_csharp_dto.DTOEnitity;
+using advanded_csharp_dto.Response;
+using advanded_csharp_service.ProductService;
 
 namespace advanded_csharp_test
 {
-
     [TestClass]
     public class ProductTest
     {
-   
+
         private readonly IProductService _iProductService;
         public ProductTest()
         {
@@ -31,7 +23,7 @@ namespace advanded_csharp_test
         public async Task TestGetListProductAsyncNoName()
         {
             //input
-            GetListProductRequest request =  new()
+            GetListProductRequest request = new()
             {
                 PageIndex = 1,
                 PageSize = 10,

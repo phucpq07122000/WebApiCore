@@ -66,7 +66,7 @@ namespace advanded_csharp_test
             Guid id = Guid.Parse(guild);
 
             // Output
-            UserResponse response = await _iUserService.GetUserDetail(id);      
+            UserResponse response = await _iUserService.GetUserDetail(id);
             Assert.IsNotNull(response); // response not null        
             Assert.AreEqual(id, response.Id);   // response UserDetails > 0
         }

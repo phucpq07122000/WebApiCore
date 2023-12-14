@@ -29,7 +29,6 @@ namespace advanded_csharp_service.UserService
                 }
             }
             return value;
-
         }
 
         public Task<UserResponse> GetUserDetail(Guid id)
